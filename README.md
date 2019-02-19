@@ -22,13 +22,11 @@ yarn add react-hook-media-query
 import React from 'react'
 import useMediaQuery from 'react-hook-media-query'
 
-const ComponentWithMouse = () => {
+const ComponentWithMediaQuery = () => {
   const small = useMediaQuery('(max-width: 720px)')
 
   return (
-    <div className="App">
-      <p>Viewport width is {small ? 'below' : 'above'} 720.</p>
-    </div>
+    <p>Viewport width is {small ? 'below' : 'above'} 720.</p>
   )
 }
 ```
