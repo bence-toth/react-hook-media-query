@@ -1,6 +1,6 @@
 {
   "name": "react-hook-media-query",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "React hook for matching media queries",
   "keywords": [
     "react",
