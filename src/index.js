@@ -11,7 +11,7 @@ const useMediaQuery = query => {
     return () => {
       window.matchMedia(query).removeEventListener("change", updateMatch)
     }
-  }, [])
+  }, [query])
 
   return match
 }
