@@ -31,10 +31,6 @@ const ComponentWithMediaQuery = () => {
 }
 ```
 
-## Notes
-
-The media query will be matched again every time a `resize` or an `orientationchange` event occurs on `window`. This is hopefully a reliable way to detect when the match value could change.
-
 ## Contributions
 
 Contributions are welcome. File bug reports, create pull requests, feel free to reach out at tothab@gmail.com.
