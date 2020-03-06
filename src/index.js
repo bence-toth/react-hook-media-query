@@ -7,7 +7,8 @@ const useMediaQuery = query => {
     const updateMatch = event => setMatch(event.matches)
 
     const matcher = window.matchMedia(query)
-      .addEventListener("change", updateMatch)
+
+    matcher.addEventListener("change", updateMatch)
     
     updateMatch(matcher)
 
