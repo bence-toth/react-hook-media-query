@@ -8,12 +8,21 @@ const useMediaQuery = query => {
 
     const matcher = window.matchMedia(query)
 
-    matcher.addEventListener("change", updateMatch)
+    const modern = 'addEventListener' in matcher;
+    if (modern) {
+      matcher.addEventListener("change", updateMatch)
+    } else {
+      matcher.addListener(updateMatch);
+    }
     
     updateMatch(matcher)
 
     return () => {
-      matcher.removeEventListener("change", updateMatch)
+      if (modern) {
+        matcher.removeEventListener("change", updateMatch)
+      } else {
+        matcher.removeListener(updateMatch)
+      }
     }
   }, [query])
 
