@@ -4,15 +4,25 @@ const useMediaQuery = query => {
   const [match, setMatch] = useState(false)
 
   useEffect(() => {
-    const updateMatch = () =>
-      setMatch(window.matchMedia(query).matches)
+    const updateMatch = event => setMatch(event.matches)
 
-    updateMatch()
-    window.matchMedia(query)
-      .addEventListener("change", updateMatch)
+    const matcher = window.matchMedia(query)
+
+    const modern = 'addEventListener' in matcher;
+    if (modern) {
+      matcher.addEventListener("change", updateMatch)
+    } else {
+      matcher.addListener(updateMatch);
+    }
+    
+    updateMatch(matcher)
+
     return () => {
-      window.matchMedia(query)
-        .removeEventListener("change", updateMatch)
+      if (modern) {
+        matcher.removeEventListener("change", updateMatch)
+      } else {
+        matcher.removeListener(updateMatch)
+      }
     }
   }, [query])
 
