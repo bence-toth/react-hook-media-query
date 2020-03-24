@@ -26,7 +26,7 @@ const useMediaQuery = query => {
         matcher.removeListener(onUpdateMatch)
       }
     }
-  }, [query])
+  }, [query, onSetDoesMatch])
 
   return doesMatch
 }
