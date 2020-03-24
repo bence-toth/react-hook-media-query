@@ -1,32 +1,34 @@
 import {useState, useEffect} from 'react'
 
 const useMediaQuery = query => {
-  const [match, setMatch] = useState(false)
+  const [doesMatch, onSetDoesMatch] = useState(false)
 
   useEffect(() => {
-    const updateMatch = event => setMatch(event.matches)
+    const onUpdateMatch = ({matches}) => {
+      onSetDoesMatch(matches)
+    }
 
     const matcher = window.matchMedia(query)
 
-    const modern = 'addEventListener' in matcher;
-    if (modern) {
-      matcher.addEventListener("change", updateMatch)
+    const isModern = 'addEventListener' in matcher
+    if (isModern) {
+      matcher.addEventListener('change', onUpdateMatch)
     } else {
-      matcher.addListener(updateMatch);
+      matcher.addListener(onUpdateMatch)
     }
-    
-    updateMatch(matcher)
+
+    onUpdateMatch(matcher)
 
     return () => {
-      if (modern) {
-        matcher.removeEventListener("change", updateMatch)
+      if (isModern) {
+        matcher.removeEventListener('change', onUpdateMatch)
       } else {
-        matcher.removeListener(updateMatch)
+        matcher.removeListener(onUpdateMatch)
       }
     }
   }, [query])
 
-  return match
+  return doesMatch
 }
 
 export default useMediaQuery
